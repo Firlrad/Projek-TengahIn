@@ -1,13 +1,62 @@
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@import 'leaflet/dist/leaflet.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  /* Reset default margin & standard viewport */
-  html,
-  body,
-  #root {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+/* Smooth scrolling across the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reset default margin & standard viewport */
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Moving dashed route lines */
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.animate-dash-flow {
+  animation: dashFlow 1.2s linear infinite;
+}
+
+/* Glowing/pulsing search radius */
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+}
+
+.animate-pulse-glow {
+  transform-origin: 480px 390px;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
