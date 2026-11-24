@@ -1,69 +1,88 @@
 # TengahIn — Fair Meeting Point
 
-Platform cerdas berbasis web untuk mencari titik temu paling adil (*Fair Meeting Point*) bagi kelompok mahasiswa dengan mempertimbangkan jarak, rute perjalanan, waktu tempuh, dan rekomendasi tempat kumpul (*cafe, coworking space, library*).
+Platform cerdas berbasis web untuk mencari titik temu paling adil (*Fair Meeting Point*) bagi kelompok mahasiswa dengan mempertimbangkan jarak, rute perjalanan jalan raya, waktu tempuh berkeadilan (*Minimax Fairness* via Hill Climbing), serta rekomendasi tempat kumpul (*cafe, coworking space, library*) yang ramah kantong.
+
+Target Penyelesaian & Presentasi: **7 Desember 2026**
 
 ---
 
-## 👥 Tim & Peran Pengembang
-- **Rehan**: Project Manager & UI/UX Designer
-- **Amas**: Frontend Engineer
-- **Faiz**: Backend Engineer
-- **Firly**: AI & Algorithm Engineer
+## Tim Pengembang & Status Progres
+
+| Anggota Tim | Peran Utama | Status Progres | Keterangan Pengerjaan |
+| :--- | :--- | :---: | :--- |
+| **Amas** | Frontend Developer | **~95% (Selesai)** | Antarmuka web responsif, Leaflet, Geocoding, GPS, dan Simulasi Haversine aktif 100%. |
+| **Rehan** | Project Manager & UI/UX Designer | **30% (Antrean)** | Struktur Git & wireframe siap. Menunggu penyusunan 5 skenario uji Surabaya & slide. |
+| **Faiz** | Backend & API Developer | **0% (Siap Mulai)** | Direktori backend bersih, siap dibangun sesuai panduan step-by-step. |
+| **Firly** | Algorithm & AI Specialist | **0% (Siap Mulai)** | Direktori modul AI bersih, siap dirancang sesuai panduan step-by-step. |
+
+Panduan tugas step-by-step lengkap untuk Rehan, Faiz, dan Firly tersedia di dokumen [PROGRESS.md](PROGRESS.md).
 
 ---
 
-## 🛠️ Tech Stack
-- **Frontend**: React (Vite), Tailwind CSS, Leaflet / React-Leaflet, Axios, Lucide React
-- **Backend**: Python 3.10+, FastAPI, Uvicorn, Pydantic, HTTPX, NumPy, GeoPy, Polyline
-- **Routing & Maps**: OpenStreetMap (OSRM) & Overpass API
+## Tech Stack
+
+* **Frontend**: React (Vite), Tailwind CSS, Leaflet / React-Leaflet, Axios, Lucide React
+* **Backend**: Python 3.10+, FastAPI, Uvicorn, Pydantic, HTTPX, NumPy, GeoPy, Polyline
+* **Routing & Maps**: OpenStreetMap (OSRM API) & Overpass API
 
 ---
 
-## 🚀 Cara Menjalankan Aplikasi Secara Lokal
+## Panduan Menjalankan Frontend (Amas)
 
-### 1. Menjalankan Backend
-Pastikan Anda sudah berada di root direktori proyek:
-
-```bash
-cd backend
-
-# Buat virtual environment
-py -m venv venv
-# Atau jika python terdaftar di PATH:
-# python -m venv venv
-
-# Aktivasi virtual environment:
-# Windows (PowerShell):
-.\venv\Scripts\Activate.ps1
-# Windows (CMD):
-# .\venv\Scripts\activate.bat
-# Mac/Linux:
-# source venv/bin/activate
-
-# Install dependensi
-pip install -r requirements.txt
-
-# Siapkan file environment
-cp .env.example .env
-
-# Jalankan server FastAPI
-uvicorn app.main:app --reload --port 8000
-```
-- API Base URL: `http://127.0.0.1:8000`
-- API Interactive Docs (Swagger): `http://127.0.0.1:8000/docs`
-
----
-
-### 2. Menjalankan Frontend
-Buka terminal baru:
+Antarmuka web saat ini sudah siap dijalankan dan diuji coba secara mandiri:
 
 ```bash
 cd frontend
 
-# Install package
+# 1. Install dependensi (cukup sekali di awal)
 npm install
 
-# Jalankan development server
+# 2. Jalankan development server
 npm run dev
 ```
-- Akses aplikasi web di browser: `http://localhost:5173`
+
+* Buka browser di [http://localhost:5173](http://localhost:5173).
+* *Catatan:* Karena backend Faiz dan Firly masih dalam tahap persiapan pengerjaan, antarmuka frontend secara otomatis mengaktifkan **Mode Simulasi Cerdas Berbasis Haversine**. Seluruh fitur (penambahan teman, pencarian alamat OpenStreetMap, deteksi GPS, kalkulasi titik tengah, dan visualisasi rute beranimasi di peta) dapat diuji coba secara langsung tanpa perlu menunggu server backend dinyalakan.
+
+---
+
+## Panduan Memulai Backend untuk Faiz & Firly
+
+Faiz dan Firly dapat mulai mengerjakan tugas masing-masing di direktori `backend/`:
+
+```bash
+cd backend
+
+# 1. Buat dan aktifkan virtual environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1   # Windows PowerShell
+# source venv/bin/activate    # macOS / Linux
+
+# 2. Install dependensi
+pip install -r requirements.txt
+
+# 3. Siapkan file environment
+copy .env.example .env
+
+# 4. Jalankan server (setelah file main.py dibuat oleh Faiz)
+uvicorn app.main:app --reload --port 8000
+```
+
+Ikuti langkah-langkah detail implementasi file di [PROGRESS.md](PROGRESS.md):
+* **Faiz**: Mulai dari `backend/app/models/schemas.py`, lalu `route_service.py`, `place_service.py`, dan `main.py`.
+* **Firly**: Mulai dari `backend/app/ai/optimizer.py` (Centroid & Hill Climbing Minimax) dan `scoring.py`.
+
+---
+
+## Alur Kerja Kolaborasi Git (Workflow)
+
+Seluruh pengembang wajib mengikuti aturan branching tim:
+1. Jangan melakukan push langsung ke branch `main`.
+2. Selalu tarik kode terbaru dari branch `dev`:
+   ```bash
+   git checkout dev
+   git pull origin dev
+   git checkout -b feat/<nama-kamu>-<nama-fitur>
+   ```
+3. Lakukan commit teratur dan buka Pull Request (PR) ke branch `dev`.
+4. Panduan lengkap tersedia di [CONTRIBUTING.md](CONTRIBUTING.md).
