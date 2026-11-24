@@ -1,0 +1,12 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+// Import CSS Leaflet agar tampilan peta tidak berantakan
+import 'leaflet/dist/leaflet.css'
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <App />
+  </React.StrictMode >,
+)
