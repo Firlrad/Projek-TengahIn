@@ -104,6 +104,7 @@ def rank_places(
 
         # Salin data tempat dan tambahkan hasil skor AI
         enriched_place = place.copy()
+        enriched_place["score"] = round(final_score, 2)
         enriched_place["ai_score"] = round(final_score, 2)
         enriched_place["score_breakdown"] = {
             "distance": s_distance,
