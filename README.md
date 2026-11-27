@@ -13,7 +13,7 @@ Target Penyelesaian & Presentasi: **7 Desember 2026**
 | **Amas** | Frontend Developer | **~95% (Selesai)** | Antarmuka web responsif, Leaflet, Geocoding, GPS, dan Simulasi Haversine aktif 100%. |
 | **Rehan** | Project Manager & UI/UX Designer | **30% (Antrean)** | Struktur Git & wireframe siap. Menunggu penyusunan 5 skenario uji Surabaya & slide. |
 | **Faiz** | Backend & API Developer | **0% (Siap Mulai)** | Direktori backend bersih, siap dibangun sesuai panduan step-by-step. |
-| **Firly** | Algorithm & AI Specialist | **0% (Siap Mulai)** | Direktori modul AI bersih, siap dirancang sesuai panduan step-by-step. |
+| **Firly** | Algorithm & AI Specialist | **85% (Hampir Selesai)** | Direktori modul AI bersih, siap dirancang sesuai panduan step-by-step. |
 
 Panduan tugas step-by-step lengkap untuk Rehan, Faiz, dan Firly tersedia di dokumen [PROGRESS.md](PROGRESS.md).
 
