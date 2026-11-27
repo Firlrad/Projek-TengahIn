@@ -2,6 +2,7 @@ import asyncio
 import math
 from typing import List, Tuple
 from app.ai.optimizer import optimize_meeting_point
+from app.services.route_service import RouteService
 
 
 def haversine_meters(p1: Tuple[float, float], p2: Tuple[float, float]) -> float:
@@ -84,7 +85,8 @@ SCENARIOS = [
 
 
 async def run_benchmark():
-    print("\n### Tabel Perbandingan Keadilan Waktu Tempuh: Centroid vs Hill Climbing (Minimax)\n")
+    route_service = RouteService()
+    print("\n### Tabel Perbandingan Keadilan Waktu Tempuh (OSRM Riil): Centroid vs Hill Climbing\n")
     print("| Skenario Uji | Disparity Awal / Centroid (Menit) | Disparity Akhir / AI (Menit) | Pengurangan Ketimpangan | Iterasi | Koordinat Optimal (Lat, Lng) |")
     print("| :--- | :---: | :---: | :---: | :---: | :--- |")
 
@@ -92,8 +94,8 @@ async def run_benchmark():
         coords = [p[1] for p in sc["peserta"]]
         res = await optimize_meeting_point(
             participants_coords=coords,
-            route_calculator=surabaya_traffic_mock_calculator,
-            max_iterations=25,
+            route_calculator=route_service.get_durations_to_target,
+            max_iterations=15,
         )
 
         disp_awal = res["initial_metrics"]["disparity"] / 60.0
